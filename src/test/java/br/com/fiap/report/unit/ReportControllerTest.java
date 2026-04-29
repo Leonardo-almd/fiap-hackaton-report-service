@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.Instant;
@@ -28,8 +28,8 @@ class ReportControllerTest {
 
     @Autowired MockMvc mockMvc;
     @Autowired ObjectMapper objectMapper;
-    @MockitoBean GetReportUseCase getReportUseCase;
-    @MockitoBean CreateReportUseCase createReportUseCase;
+    @MockBean GetReportUseCase getReportUseCase;
+    @MockBean CreateReportUseCase createReportUseCase;
 
     private Report sampleReport(UUID jobId) {
         return new Report(UUID.randomUUID(), jobId,
