@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS componentes (
     nome       VARCHAR(200) NOT NULL,
     tipo       VARCHAR(50)  NOT NULL
                     CHECK (tipo IN ('GATEWAY','SERVICE','DATABASE','QUEUE','CACHE',
-                                    'CDN','LOAD_BALANCER','EXTERNAL','UNKNOWN')),
+                                    'CDN','LOAD_BALANCER','STORAGE','CLIENT','OTHER','EXTERNAL','UNKNOWN')),
     descricao  TEXT        NOT NULL
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS riscos (
     severidade           VARCHAR(10)  NOT NULL CHECK (severidade IN ('ALTA','MEDIA','BAIXA')),
     categoria            VARCHAR(30)  NOT NULL
                              CHECK (categoria IN ('SEGURANCA','ACOPLAMENTO','ESCALABILIDADE',
-                                                  'DISPONIBILIDADE','PERFORMANCE','MANUTENCAO')),
+                                                  'DISPONIBILIDADE', 'OBSERVABILIDADE','PERFORMANCE','MANUTENCAO', 'OTHER')),
     titulo               VARCHAR(200) NOT NULL,
     descricao            TEXT         NOT NULL,
     componentes_afetados TEXT[]       NOT NULL DEFAULT '{}'
