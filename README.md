@@ -1,4 +1,4 @@
-# fiap-report-service
+# fiap-hackaton-report-service
 
 Microsserviço responsável por:
 - Persistir relatórios de análise arquitetural gerados pela IA
@@ -8,7 +8,7 @@ Microsserviço responsável por:
 
 ## Contrato de API
 
-Documentação completa: [`fiap-infrastructure/docs/api/report-service-api.yaml`](https://github.com/org/fiap-infrastructure/blob/main/docs/api/report-service-api.yaml)
+Documentação completa: [`fiap-hackaton-infrastructure/docs/api/report-service-api.yaml`](https://github.com/org/fiap-hackaton-infrastructure/blob/main/docs/api/report-service-api.yaml)
 
 ### Endpoints
 
@@ -44,7 +44,7 @@ src/main/java/br/com/fiap/report/
 ## Desenvolvimento local
 
 ```bash
-# Pré-requisito: report-db rodando (ver fiap-infrastructure)
+# Pré-requisito: report-db rodando (ver fiap-hackaton-infrastructure)
 mvn spring-boot:run
 
 mvn test
@@ -52,7 +52,7 @@ mvn test
 
 ## Como rodar com Docker Compose
 
-Este serviço eh executado via `docker compose` no repositório `fiap-infrastructure`.
+Este serviço eh executado via `docker compose` no repositório `fiap-hackaton-infrastructure`.
 O Compose sobe para este serviço:
 - `report-db` (PostgreSQL)
 - `report-service` (esta API, usando este `Dockerfile`)
@@ -67,18 +67,18 @@ Opcionalmente, para fluxo ponta a ponta, rode junto com `upload-service` e `proc
 
 ```text
 Hackaton/
-├── fiap-upload-service/
-├── fiap-processing-service/
-├── fiap-report-service/
-└── fiap-infrastructure/
+├── fiap-hackaton-upload-service/
+├── fiap-hackaton-processing-service/
+├── fiap-hackaton-report-service/
+└── fiap-hackaton-infrastructure/
 ```
 
 ### 2) Subir banco e API de relatórios
 
-No diretório `fiap-infrastructure`:
+No diretório `fiap-hackaton-infrastructure`:
 
 ```bash
-cd ../fiap-infrastructure
+cd ../fiap-hackaton-infrastructure
 docker compose up -d report-db report-service
 ```
 
@@ -140,7 +140,7 @@ curl "http://localhost:8082/v1/reports/$JOB_ID"
 
 ### 5) Rebuild da API após alterar código
 
-No `fiap-infrastructure`:
+No `fiap-hackaton-infrastructure`:
 
 ```bash
 docker compose up -d --build report-service
@@ -168,7 +168,7 @@ Sintoma:
 Solução:
 
 ```bash
-cd ../fiap-infrastructure
+cd ../fiap-hackaton-infrastructure
 docker compose down -v --remove-orphans
 docker compose up -d report-db report-service
 ```
@@ -187,16 +187,16 @@ lsof -i :8082
 
 #### Confirmar que o Compose usa o Dockerfile correto
 
-No `fiap-infrastructure/docker-compose.yml`:
+No `fiap-hackaton-infrastructure/docker-compose.yml`:
 
 ```yaml
 report-service:
   build:
-    context: ../fiap-report-service
+    context: ../fiap-hackaton-report-service
     dockerfile: Dockerfile
 ```
 
-Ou seja, sim: o arquivo `fiap-report-service/Dockerfile` eh o usado pelo Compose.
+Ou seja, sim: o arquivo `fiap-hackaton-report-service/Dockerfile` eh o usado pelo Compose.
 
 ## Variáveis de ambiente
 
